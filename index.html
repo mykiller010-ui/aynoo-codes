@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AYNOO Codes</title>
+<meta name="description" content="Give codes, _C class names and server settings for the AYNOO mod for ARK: Survival Ascended.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 1040px column. Header with the mod ID, a sticky tool bar over a dense code list grouped by item
+   family, then the guides as numbered steps. Dark only on purpose: it matches the mod's in-game AYNOO panels. */
+:root{
+  --bg:#0f0c16; --panel:#18141f; --panel-2:#211b2c; --line:#2f2742; --fg:#ede9f5; --muted:#a39bba;
+  --purple:#b986ff; --cyan:#5fe0e5; --gold:#f1c661; --ok:#6bd59a; --warn:#f3a266;
+  --display:"Oxanium","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:28px 80px}
+a{color:var(--cyan)}
+code,.mono{font-family:var(--mono);font-size:12.5px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:.01em}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+/* header */
+.top{display:grid;gap:18px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.eyebrow{font:600 12px/1 var(--display);letter-spacing:.22em;text-transform:uppercase;color:var(--purple)}
+.top h1{font-size:clamp(30px,5vw,44px);font-weight:700;line-height:1.05}
+.top h1 b{color:var(--gold);font-weight:700}
+.top p{margin:0;color:var(--muted);max-width:62ch}
+.ids{display:flex;flex-wrap:wrap;gap:10px}
+.id{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.id span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.id code{font-size:15px;color:var(--gold)}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
+nav.toc a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+nav.toc a:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* buttons */
+.btn{border:1px solid var(--line);background:var(--panel-2);color:var(--fg);border-radius:7px;padding:5px 10px;font-size:12.5px;white-space:nowrap}
+.btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn.main{background:var(--purple);border-color:var(--purple);color:#140d20;font-weight:600}
+.btn.main:hover{background:var(--cyan);border-color:var(--cyan);color:#0b1416}
+.btn.done{border-color:var(--ok);color:var(--ok)}
+.btn.main.done{background:var(--ok);border-color:var(--ok);color:#0b1610}
+
+section{padding-top:40px}
+section > h2{font-size:24px;font-weight:700;display:flex;align-items:baseline;gap:12px}
+section > h2 .n{font:600 13px/1 var(--mono);color:var(--purple)}
+section > .lead{color:var(--muted);margin:8px 0 18px;max-width:68ch}
+
+/* tool bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:8px}
+.bar input[type=search]{flex:1 1 240px;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--fg);padding:8px 12px;font:inherit}
+.bar label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.bar input[type=number]{width:84px;background:var(--panel);border:1px solid var(--line);border-radius:8px;color:var(--fg);padding:7px 8px;font:inherit;font-variant-numeric:tabular-nums}
+.bar input[type=checkbox]{accent-color:var(--purple);width:16px;height:16px}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* code list */
+.group{padding-top:22px}
+.group > h3{font-size:16px;font-weight:600;color:var(--cyan);text-transform:uppercase;letter-spacing:.12em;display:flex;gap:10px;align-items:baseline}
+.group > h3 small{font:400 12px var(--body);color:var(--muted);letter-spacing:0;text-transform:none}
+.group > .note{font-size:13px;color:var(--muted);margin:4px 0 0}
+.items{display:grid;gap:10px;margin-top:12px}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:8px;min-width:0}
+.item header{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.item h4{font-size:16px;font-weight:600}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.eng{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+.tag.adm{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 45%,transparent)}
+.tag.plc{color:var(--cyan);border-color:color-mix(in srgb,var(--cyan) 40%,transparent)}
+.row{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:10px;align-items:center}
+.row .lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.row code{display:block;background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:6px 9px;overflow-wrap:anywhere;color:var(--fg)}
+.row.give code{color:var(--gold)}
+details{font-size:13px}
+details summary{color:var(--muted);cursor:pointer;width:max-content;max-width:100%}
+details summary:hover{color:var(--cyan)}
+details .row{margin-top:8px}
+.empty{padding:30px 0;color:var(--muted)}
+
+/* guides */
+.guide{display:grid;gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
+.card h3{font-size:18px;font-weight:600;margin-bottom:10px}
+.card p{margin:0 0 10px;max-width:70ch}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:12px}
+ol.steps > li{counter-increment:s;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start}
+ol.steps > li::before{content:counter(s);font:600 13px/26px var(--mono);text-align:center;width:26px;height:26px;border-radius:50%;border:1px solid var(--purple);color:var(--purple)}
+ol.steps > li > div{min-width:0}
+ul.plain{margin:0;padding-left:18px;display:grid;gap:6px}
+.snip{position:relative;margin:10px 0 4px}
+.snip pre{margin:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow-x:auto;font:12.5px/1.6 var(--mono);color:var(--fg)}
+.snip .btn{position:absolute;top:8px;right:8px}
+.inline{background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--gold)}
+.callout{border-left:3px solid var(--warn);background:color-mix(in srgb,var(--warn) 8%,var(--panel));padding:10px 14px;border-radius:0 8px 8px 0;font-size:14px;margin:10px 0 0}
+.callout.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 8%,var(--panel))}
+.checks{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.checks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px}
+.checks li::before{content:"";width:14px;height:14px;margin-top:4px;border:1.5px solid var(--muted);border-radius:3px}
+.checks li.ok::before{border-color:var(--ok);background:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+.tbl{overflow-x:auto}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+td code{overflow-wrap:anywhere}
+
+#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);opacity:0;
+  background:var(--ok);color:#0b1610;font-weight:600;padding:8px 16px;border-radius:99px;transition:opacity .15s,transform .15s;pointer-events:none;z-index:20}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+
+@media (max-width:640px){
+  .row{grid-template-columns:minmax(0,1fr) auto}
+  .row .lbl{grid-column:1 / -1}
+  .card{padding:16px}
+}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
+.links{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">AYNOO mod · ARK: Survival Ascended</div>
+    <h1>Codes, <b>_C</b> names and guides</h1>
+    <p>Every give code and class name in the AYNOO mod, how to use them, and how to set up your server. Read straight from the mod's own data on 4 October 2026: <span id="nItems">46</span> items, <span id="nEng">34</span> engrams.</p>
+    <div class="ids">
+      <div class="id"><span>CurseForge mod ID</span><code>1719367</code><button class="btn" data-copy="1719367">Copy</button></div>
+      <div class="id"><span>Server start line</span><code>-mods=1719367</code><button class="btn" data-copy="-mods=1719367">Copy</button></div>
+    </div>
+    <div class="links"><a href="https://www.curseforge.com/ark-survival-ascended/mods/aycoo" target="_blank" rel="noopener">AYNOO on CurseForge</a><a href="https://discord.gg/5BqzUB8Rzd" target="_blank" rel="noopener">Discord</a><a href="https://aynoo.net" target="_blank" rel="noopener">aynoo.net</a></div>
+    <nav class="toc" aria-label="Sections">
+      <a href="#codes">Give codes</a><a href="#use">Use the codes</a><a href="#server">Server settings</a><a href="#tech">For plugin makers</a>
+    </nav>
+  </header>
+
+  <section id="codes">
+    <h2><span class="n">01</span>Give codes and _C names</h2>
+    <p class="lead">Copy a give code, open the console in game with <span class="inline">Tab</span>, paste with <span class="inline">Ctrl+V</span> and press Enter. The <b>_C name</b> is what server settings and shops ask for.</p>
+    <div class="bar">
+      <input type="search" id="q" placeholder="Search: deposit, jacket, trail, _C name…" aria-label="Search items">
+      <label for="qty">Amount <input type="number" id="qty" min="1" max="100000" value="1"></label>
+      <label for="bp"><input type="checkbox" id="bp"> Blueprint</label>
+      <button class="btn" id="copyAll">Copy all shown give codes</button>
+      <span class="count" id="count"></span>
+    </div>
+    <div id="list"></div>
+  </section>
+
+  <section id="use">
+    <h2><span class="n">02</span>Use the codes in game</h2>
+    <div class="guide">
+      <div class="card">
+        <h3>Give an item to yourself</h3>
+        <ol class="steps">
+          <li><div>On your server, log in as admin once per session: press <span class="inline">Tab</span>, then type <span class="inline">EnableCheats</span>, a space, and your admin password, then press Enter. In single player you can skip this.</div></li>
+          <li><div>Copy the item's give code from the list above. Set <b>Amount</b> first if you want more than one.</div></li>
+          <li><div>In game press <span class="inline">Tab</span>, paste with <span class="inline">Ctrl+V</span>, press Enter. The item lands in your inventory.</div></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Give an item to another player</h3>
+        <ol class="steps">
+          <li><div>Press Esc and click <b>ADMIN</b> (or the ADMIN button under your inventory). Only admins see it.</div></li>
+          <li><div>Pick the player in the list.</div></li>
+          <li><div>Use <b>GIVE COINS</b> with an amount, or pick an item and press <b>GIVE</b>. The list there has 34 items: the cosmetics, the streamer jackets and the Auto Deposit. Loot drops have their own buttons.</div></li>
+        </ol>
+        <p class="callout ok">Streamer jackets (Game Series, SAS, WAEL51) have no engram. Players can only get them from you, by code or from the admin panel.</p>
+      </div>
+      <div class="card">
+        <h3>What the numbers at the end mean</h3>
+        <p><span class="inline">cheat GiveItem "…" 1 0 0</span> = amount, quality, blueprint. Change the first number for more items. Set the last one to <span class="inline">1</span> to give a blueprint instead of the item (the Blueprint box above does it).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="server">
+    <h2><span class="n">03</span>Server settings</h2>
+    <div class="guide">
+      <div class="card">
+        <h3>Load the mod on your server</h3>
+        <ol class="steps">
+          <li><div>Add <span class="inline">-mods=1719367</span> to the server start line. With other mods, separate the IDs with commas and no spaces: <span class="inline">-mods=1719367,111111</span>.</div></li>
+          <li><div>On a hosting panel, put <span class="inline">1719367</span> in its Mods field instead.</div></li>
+          <li><div>Restart the server. It downloads the newest approved version by itself; players get it when they join.</div></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Change engrams, recipes and stacks (Game.ini)</h3>
+        <p>These lines go in <span class="inline">Game.ini</span> under <span class="inline">[/script/shootergame.shootergamemode]</span>. They use the short <b>_C names</b> from the list. Restart the server after a change. Examples:</p>
+        <p><b>Auto Deposit engram</b> (default level 35, 18 points):</p>
+        <div class="snip"><button class="btn" data-copy-pre>Copy</button><pre>OverrideNamedEngramEntries=(EngramClassName="EngramEntry_AynooDeposit_C",EngramHidden=false,EngramPointsCost=18,EngramLevelRequirement=35,RemoveEngramPreReq=false)</pre></div>
+        <p><b>Auto Deposit recipe</b> (default 60 metal ingot, 25 crystal, 40 cementing paste, 15 polymer):</p>
+        <div class="snip"><button class="btn" data-copy-pre>Copy</button><pre>ConfigOverrideItemCraftingCosts=(ItemClassString="PrimalItemStructure_AynooDeposit_C",BaseCraftingResourceRequirements=((ResourceItemTypeString="PrimalItemResource_MetalIngot_C",BaseResourceRequirement=60.0,bCraftingRequireExactResourceType=false),(ResourceItemTypeString="PrimalItemResource_Crystal_C",BaseResourceRequirement=25.0,bCraftingRequireExactResourceType=false),(ResourceItemTypeString="PrimalItemResource_ChitinPaste_C",BaseResourceRequirement=40.0,bCraftingRequireExactResourceType=false),(ResourceItemTypeString="PrimalItemResource_Polymer_C",BaseResourceRequirement=15.0,bCraftingRequireExactResourceType=false)))</pre></div>
+        <p><b>Hide an engram</b> (example: the Glow Totem), so nobody can learn it:</p>
+        <div class="snip"><button class="btn" data-copy-pre>Copy</button><pre>OverrideNamedEngramEntries=(EngramClassName="EngramEntry_AynooGlowTotem_C",EngramHidden=true)</pre></div>
+        <p><b>Aynoo Coin stack size</b> (default 1000):</p>
+        <div class="snip"><button class="btn" data-copy-pre>Copy</button><pre>ConfigOverrideItemMaxQuantity=(ItemClassString="PrimalItemConsumable_AynooCoin_C",Quantity=(MaxItemQuantity=1000,bIgnoreMultiplier=true))</pre></div>
+        <p class="callout">These are ARK's standard Game.ini settings. After a server restart, check one change in game before you rely on it.</p>
+      </div>
+      <div class="card">
+        <h3>Shops and plugins</h3>
+        <p>Most shop plugins want the <b>Blueprint path</b>: the part inside the quotes of a give code, for example</p>
+        <div class="snip"><button class="btn" data-copy-pre>Copy</button><pre>Blueprint'/AynooMod/Deposit/PrimalItemStructure_AynooDeposit.PrimalItemStructure_AynooDeposit'</pre></div>
+        <p>If a tool asks for a class name instead, use the <b>_C name</b> (short) or the full <b>_C path</b> (open "All class paths" on an item).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech">
+    <h2><span class="n">04</span>For plugin makers</h2>
+    <div class="guide">
+      <div class="card">
+        <h3>Default buffs (every player gets these)</h3>
+        <div class="tbl"><table>
+          <thead><tr><th>Buff</th><th>What it does</th><th>_C path</th></tr></thead>
+          <tbody id="buffs"></tbody>
+        </table></div>
+      </div>
+      <div class="card">
+        <h3>Send an AYNOO notification</h3>
+        <p>Call <span class="inline">ClientAynooNotify(Type, Title, Message, Duration)</span> on the server, on that player's <b>PrimalBuff_AynooNotify_C</b>. It shows on that player's screen.</p>
+        <p>Types: info, success, warning, error, reward, pvp, safezone, announcement, shop. Duration 0 uses the type's default. Not tested with a real plugin yet.</p>
+      </div>
+      <div class="card">
+        <h3>Mod data</h3>
+        <div class="row"><span class="lbl">Mod data</span><code>/AynooMod/ModDataAsset_AynooMod</code><button class="btn" data-copy="/AynooMod/ModDataAsset_AynooMod">Copy</button></div>
+        <div class="row" style="margin-top:8px"><span class="lbl">Game data</span><code>/AynooMod/PrimalGameData_BP_AynooMod.PrimalGameData_BP_AynooMod_C</code><button class="btn" data-copy="/AynooMod/PrimalGameData_BP_AynooMod.PrimalGameData_BP_AynooMod_C">Copy</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Generated from the AYNOO mod's own game data. Last updated 4 October 2026.</footer>
+</div>
+<div id="toast" role="status" aria-live="polite">Copied</div>
+
+<script type="application/json" id="data">{"items": [{"name": "AYNOO Banner - Black", "give": "Blueprint'/AynooMod/Cosmetics/Banners/PrimalItemStructure_AynooBanner_Black.PrimalItemStructure_AynooBanner_Black'", "item_c": "/AynooMod/Cosmetics/Banners/PrimalItemStructure_AynooBanner_Black.PrimalItemStructure_AynooBanner_Black_C", "short": "PrimalItemStructure_AynooBanner_Black_C", "struct": "/AynooMod/Cosmetics/Banners/PrimalStructure_AynooBanner_Black.PrimalStructure_AynooBanner_Black_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooBanner_Black.EngramEntry_AynooBanner_Black_C", "lvl": 1, "pts": 0, "group": "Banners"}, {"name": "AYNOO Banner - Blue", "give": "Blueprint'/AynooMod/Cosmetics/Banners/PrimalItemStructure_AynooBanner_Blue.PrimalItemStructure_AynooBanner_Blue'", "item_c": "/AynooMod/Cosmetics/Banners/PrimalItemStructure_AynooBanner_Blue.PrimalItemStructure_AynooBanner_Blue_C", "short": "PrimalItemStructure_AynooBanner_Blue_C", "struct": "/AynooMod/Cosmetics/Banners/PrimalStructure_AynooBanner_Blue.PrimalStructure_AynooBanner_Blue_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooBanner_Blue.EngramEntry_AynooBanner_Blue_C", "lvl": 1, "pts": 0, "group": "Banners"}, {"name": "AYNOO Banner - Purple", "give": "Blueprint'/AynooMod/Cosmetics/Banners/PrimalItemStructure_AynooBanner_Purple.PrimalItemStructure_AynooBanner_Purple'", "item_c": "/AynooMod/Cosmetics/Banners/PrimalItemStructure_AynooBanner_Purple.PrimalItemStructure_AynooBanner_Purple_C", "short": "PrimalItemStructure_AynooBanner_Purple_C", "struct": "/AynooMod/Cosmetics/Banners/PrimalStructure_AynooBanner_Purple.PrimalStructure_AynooBanner_Purple_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooBanner_Purple.EngramEntry_AynooBanner_Purple_C", "lvl": 1, "pts": 0, "group": "Banners"}, {"name": "AYNOO Banner - Red", "give": "Blueprint'/AynooMod/Cosmetics/Banners/PrimalItemStructure_AynooBanner_Red.PrimalItemStructure_AynooBanner_Red'", "item_c": "/AynooMod/Cosmetics/Banners/PrimalItemStructure_AynooBanner_Red.PrimalItemStructure_AynooBanner_Red_C", "short": "PrimalItemStructure_AynooBanner_Red_C", "struct": "/AynooMod/Cosmetics/Banners/PrimalStructure_AynooBanner_Red.PrimalStructure_AynooBanner_Red_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooBanner_Red.EngramEntry_AynooBanner_Red_C", "lvl": 1, "pts": 0, "group": "Banners"}, {"name": "AYNOO Beanie", "give": "Blueprint'/AynooMod/Cosmetics/Hats/PrimalItemAccessory_AynooHat_Beanie.PrimalItemAccessory_AynooHat_Beanie'", "item_c": "/AynooMod/Cosmetics/Hats/PrimalItemAccessory_AynooHat_Beanie.PrimalItemAccessory_AynooHat_Beanie_C", "short": "PrimalItemAccessory_AynooHat_Beanie_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooHat_Beanie.EngramEntry_AynooHat_Beanie_C", "lvl": 1, "pts": 0, "group": "Hats"}, {"name": "AYNOO Casual Boots", "give": "Blueprint'/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_CasualBoots.PrimalItemAccessory_AynooStreet_CasualBoots'", "item_c": "/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_CasualBoots.PrimalItemAccessory_AynooStreet_CasualBoots_C", "short": "PrimalItemAccessory_AynooStreet_CasualBoots_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooStreet_CasualBoots.EngramEntry_AynooStreet_CasualBoots_C", "lvl": 1, "pts": 0, "group": "Streetwear"}, {"name": "AYNOO Cowboy Hat", "give": "Blueprint'/AynooMod/Cosmetics/Hats/PrimalItemAccessory_AynooHat_Cowboy.PrimalItemAccessory_AynooHat_Cowboy'", "item_c": "/AynooMod/Cosmetics/Hats/PrimalItemAccessory_AynooHat_Cowboy.PrimalItemAccessory_AynooHat_Cowboy_C", "short": "PrimalItemAccessory_AynooHat_Cowboy_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooHat_Cowboy.EngramEntry_AynooHat_Cowboy_C", "lvl": 1, "pts": 0, "group": "Hats"}, {"name": "AYNOO Crown - Gold", "give": "Blueprint'/AynooMod/Cosmetics/Crowns/PrimalItemAccessory_AynooCrown_Gold.PrimalItemAccessory_AynooCrown_Gold'", "item_c": "/AynooMod/Cosmetics/Crowns/PrimalItemAccessory_AynooCrown_Gold.PrimalItemAccessory_AynooCrown_Gold_C", "short": "PrimalItemAccessory_AynooCrown_Gold_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooCrown_Gold.EngramEntry_AynooCrown_Gold_C", "lvl": 1, "pts": 0, "group": "Crowns"}, {"name": "AYNOO Crown - Ice", "give": "Blueprint'/AynooMod/Cosmetics/Crowns/PrimalItemAccessory_AynooCrown_Ice.PrimalItemAccessory_AynooCrown_Ice'", "item_c": "/AynooMod/Cosmetics/Crowns/PrimalItemAccessory_AynooCrown_Ice.PrimalItemAccessory_AynooCrown_Ice_C", "short": "PrimalItemAccessory_AynooCrown_Ice_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooCrown_Ice.EngramEntry_AynooCrown_Ice_C", "lvl": 1, "pts": 0, "group": "Crowns"}, {"name": "AYNOO Crown - Royal", "give": "Blueprint'/AynooMod/Cosmetics/Crowns/PrimalItemAccessory_AynooCrown_Royal.PrimalItemAccessory_AynooCrown_Royal'", "item_c": "/AynooMod/Cosmetics/Crowns/PrimalItemAccessory_AynooCrown_Royal.PrimalItemAccessory_AynooCrown_Royal_C", "short": "PrimalItemAccessory_AynooCrown_Royal_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooCrown_Royal.EngramEntry_AynooCrown_Royal_C", "lvl": 1, "pts": 0, "group": "Crowns"}, {"name": "AYNOO Fire Dragon Sweatshirt", "give": "Blueprint'/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_FireHoodie.PrimalItemAccessory_AynooStreet_FireHoodie'", "item_c": "/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_FireHoodie.PrimalItemAccessory_AynooStreet_FireHoodie_C", "short": "PrimalItemAccessory_AynooStreet_FireHoodie_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooStreet_FireHoodie.EngramEntry_AynooStreet_FireHoodie_C", "lvl": 1, "pts": 0, "group": "Streetwear"}, {"name": "AYNOO Game Over Sweatshirt", "give": "Blueprint'/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_GameOverHoodie.PrimalItemAccessory_AynooStreet_GameOverHoodie'", "item_c": "/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_GameOverHoodie.PrimalItemAccessory_AynooStreet_GameOverHoodie_C", "short": "PrimalItemAccessory_AynooStreet_GameOverHoodie_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooStreet_GameOverHoodie.EngramEntry_AynooStreet_GameOverHoodie_C", "lvl": 1, "pts": 0, "group": "Streetwear"}, {"name": "AYNOO Ice Dragon Sweatshirt", "give": "Blueprint'/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_IceHoodie.PrimalItemAccessory_AynooStreet_IceHoodie'", "item_c": "/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_IceHoodie.PrimalItemAccessory_AynooStreet_IceHoodie_C", "short": "PrimalItemAccessory_AynooStreet_IceHoodie_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooStreet_IceHoodie.EngramEntry_AynooStreet_IceHoodie_C", "lvl": 1, "pts": 0, "group": "Streetwear"}, {"name": "AYNOO Military Boots", "give": "Blueprint'/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_MilitaryBoots.PrimalItemAccessory_AynooStreet_MilitaryBoots'", "item_c": "/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_MilitaryBoots.PrimalItemAccessory_AynooStreet_MilitaryBoots_C", "short": "PrimalItemAccessory_AynooStreet_MilitaryBoots_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooStreet_MilitaryBoots.EngramEntry_AynooStreet_MilitaryBoots_C", "lvl": 1, "pts": 0, "group": "Streetwear"}, {"name": "AYNOO Neon Storage - Cyan", "give": "Blueprint'/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonStorage_Cyan.PrimalItemStructure_AynooNeonStorage_Cyan'", "item_c": "/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonStorage_Cyan.PrimalItemStructure_AynooNeonStorage_Cyan_C", "short": "PrimalItemStructure_AynooNeonStorage_Cyan_C", "struct": "/AynooMod/Cosmetics/Neon/PrimalStructure_AynooNeonStorage_Cyan.PrimalStructure_AynooNeonStorage_Cyan_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooNeonStorage_Cyan.EngramEntry_AynooNeonStorage_Cyan_C", "lvl": 1, "pts": 0, "group": "Neon"}, {"name": "AYNOO Neon Storage - Gold", "give": "Blueprint'/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonStorage_Gold.PrimalItemStructure_AynooNeonStorage_Gold'", "item_c": "/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonStorage_Gold.PrimalItemStructure_AynooNeonStorage_Gold_C", "short": "PrimalItemStructure_AynooNeonStorage_Gold_C", "struct": "/AynooMod/Cosmetics/Neon/PrimalStructure_AynooNeonStorage_Gold.PrimalStructure_AynooNeonStorage_Gold_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooNeonStorage_Gold.EngramEntry_AynooNeonStorage_Gold_C", "lvl": 1, "pts": 0, "group": "Neon"}, {"name": "AYNOO Neon Storage - Purple", "give": "Blueprint'/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonStorage_Purple.PrimalItemStructure_AynooNeonStorage_Purple'", "item_c": "/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonStorage_Purple.PrimalItemStructure_AynooNeonStorage_Purple_C", "short": "PrimalItemStructure_AynooNeonStorage_Purple_C", "struct": "/AynooMod/Cosmetics/Neon/PrimalStructure_AynooNeonStorage_Purple.PrimalStructure_AynooNeonStorage_Purple_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooNeonStorage_Purple.EngramEntry_AynooNeonStorage_Purple_C", "lvl": 1, "pts": 0, "group": "Neon"}, {"name": "AYNOO Neon Totem - Cyan", "give": "Blueprint'/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonTotem_Cyan.PrimalItemStructure_AynooNeonTotem_Cyan'", "item_c": "/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonTotem_Cyan.PrimalItemStructure_AynooNeonTotem_Cyan_C", "short": "PrimalItemStructure_AynooNeonTotem_Cyan_C", "struct": "/AynooMod/Cosmetics/Neon/PrimalStructure_AynooNeonTotem_Cyan.PrimalStructure_AynooNeonTotem_Cyan_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooNeonTotem_Cyan.EngramEntry_AynooNeonTotem_Cyan_C", "lvl": 1, "pts": 0, "group": "Neon"}, {"name": "AYNOO Neon Totem - Gold", "give": "Blueprint'/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonTotem_Gold.PrimalItemStructure_AynooNeonTotem_Gold'", "item_c": "/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonTotem_Gold.PrimalItemStructure_AynooNeonTotem_Gold_C", "short": "PrimalItemStructure_AynooNeonTotem_Gold_C", "struct": "/AynooMod/Cosmetics/Neon/PrimalStructure_AynooNeonTotem_Gold.PrimalStructure_AynooNeonTotem_Gold_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooNeonTotem_Gold.EngramEntry_AynooNeonTotem_Gold_C", "lvl": 1, "pts": 0, "group": "Neon"}, {"name": "AYNOO Neon Totem - Purple", "give": "Blueprint'/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonTotem_Purple.PrimalItemStructure_AynooNeonTotem_Purple'", "item_c": "/AynooMod/Cosmetics/Neon/PrimalItemStructure_AynooNeonTotem_Purple.PrimalItemStructure_AynooNeonTotem_Purple_C", "short": "PrimalItemStructure_AynooNeonTotem_Purple_C", "struct": "/AynooMod/Cosmetics/Neon/PrimalStructure_AynooNeonTotem_Purple.PrimalStructure_AynooNeonTotem_Purple_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooNeonTotem_Purple.EngramEntry_AynooNeonTotem_Purple_C", "lvl": 1, "pts": 0, "group": "Neon"}, {"name": "AYNOO Trail - Cyan", "give": "Blueprint'/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Cyan.PrimalItemAccessory_AynooTrail_Cyan'", "item_c": "/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Cyan.PrimalItemAccessory_AynooTrail_Cyan_C", "short": "PrimalItemAccessory_AynooTrail_Cyan_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooTrail_Cyan.EngramEntry_AynooTrail_Cyan_C", "lvl": 1, "pts": 0, "group": "Trails"}, {"name": "AYNOO Trail - Gold", "give": "Blueprint'/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Gold.PrimalItemAccessory_AynooTrail_Gold'", "item_c": "/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Gold.PrimalItemAccessory_AynooTrail_Gold_C", "short": "PrimalItemAccessory_AynooTrail_Gold_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooTrail_Gold.EngramEntry_AynooTrail_Gold_C", "lvl": 1, "pts": 0, "group": "Trails"}, {"name": "AYNOO Trail - Green", "give": "Blueprint'/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Green.PrimalItemAccessory_AynooTrail_Green'", "item_c": "/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Green.PrimalItemAccessory_AynooTrail_Green_C", "short": "PrimalItemAccessory_AynooTrail_Green_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooTrail_Green.EngramEntry_AynooTrail_Green_C", "lvl": 1, "pts": 0, "group": "Trails"}, {"name": "AYNOO Trail - Pink", "give": "Blueprint'/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Pink.PrimalItemAccessory_AynooTrail_Pink'", "item_c": "/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Pink.PrimalItemAccessory_AynooTrail_Pink_C", "short": "PrimalItemAccessory_AynooTrail_Pink_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooTrail_Pink.EngramEntry_AynooTrail_Pink_C", "lvl": 1, "pts": 0, "group": "Trails"}, {"name": "AYNOO Trail - Purple", "give": "Blueprint'/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Purple.PrimalItemAccessory_AynooTrail_Purple'", "item_c": "/AynooMod/Cosmetics/Trails/PrimalItemAccessory_AynooTrail_Purple.PrimalItemAccessory_AynooTrail_Purple_C", "short": "PrimalItemAccessory_AynooTrail_Purple_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooTrail_Purple.EngramEntry_AynooTrail_Purple_C", "lvl": 1, "pts": 0, "group": "Trails"}, {"name": "AYNOO Trucker Cap", "give": "Blueprint'/AynooMod/Cosmetics/Hats/PrimalItemAccessory_AynooHat_Trucker.PrimalItemAccessory_AynooHat_Trucker'", "item_c": "/AynooMod/Cosmetics/Hats/PrimalItemAccessory_AynooHat_Trucker.PrimalItemAccessory_AynooHat_Trucker_C", "short": "PrimalItemAccessory_AynooHat_Trucker_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooHat_Trucker.EngramEntry_AynooHat_Trucker_C", "lvl": 1, "pts": 0, "group": "Hats"}, {"name": "AYNOO Varsity Boots", "give": "Blueprint'/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_Boots.PrimalItemAccessory_AynooVarsity_Boots'", "item_c": "/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_Boots.PrimalItemAccessory_AynooVarsity_Boots_C", "short": "PrimalItemAccessory_AynooVarsity_Boots_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooVarsity_Boots.EngramEntry_AynooVarsity_Boots_C", "lvl": 1, "pts": 0, "group": "Varsity"}, {"name": "AYNOO Varsity Jacket", "give": "Blueprint'/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_Jacket.PrimalItemAccessory_AynooVarsity_Jacket'", "item_c": "/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_Jacket.PrimalItemAccessory_AynooVarsity_Jacket_C", "short": "PrimalItemAccessory_AynooVarsity_Jacket_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooVarsity_Jacket.EngramEntry_AynooVarsity_Jacket_C", "lvl": 1, "pts": 0, "group": "Varsity"}, {"name": "AYNOO Varsity Pants", "give": "Blueprint'/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_Pants.PrimalItemAccessory_AynooVarsity_Pants'", "item_c": "/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_Pants.PrimalItemAccessory_AynooVarsity_Pants_C", "short": "PrimalItemAccessory_AynooVarsity_Pants_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooVarsity_Pants.EngramEntry_AynooVarsity_Pants_C", "lvl": 1, "pts": 0, "group": "Varsity"}, {"name": "AYNOO White Pants", "give": "Blueprint'/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_WhitePants.PrimalItemAccessory_AynooStreet_WhitePants'", "item_c": "/AynooMod/Cosmetics/Streetwear/PrimalItemAccessory_AynooStreet_WhitePants.PrimalItemAccessory_AynooStreet_WhitePants_C", "short": "PrimalItemAccessory_AynooStreet_WhitePants_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooStreet_WhitePants.EngramEntry_AynooStreet_WhitePants_C", "lvl": 1, "pts": 0, "group": "Streetwear"}, {"name": "Game Series Varsity Jacket", "give": "Blueprint'/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_JacketGS.PrimalItemAccessory_AynooVarsity_JacketGS'", "item_c": "/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_JacketGS.PrimalItemAccessory_AynooVarsity_JacketGS_C", "short": "PrimalItemAccessory_AynooVarsity_JacketGS_C", "group": "Varsity"}, {"name": "SAS Varsity Jacket", "give": "Blueprint'/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_JacketSAS.PrimalItemAccessory_AynooVarsity_JacketSAS'", "item_c": "/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_JacketSAS.PrimalItemAccessory_AynooVarsity_JacketSAS_C", "short": "PrimalItemAccessory_AynooVarsity_JacketSAS_C", "group": "Varsity"}, {"name": "WAEL51 Varsity Jacket", "give": "Blueprint'/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_JacketW51.PrimalItemAccessory_AynooVarsity_JacketW51'", "item_c": "/AynooMod/Cosmetics/Varsity/PrimalItemAccessory_AynooVarsity_JacketW51.PrimalItemAccessory_AynooVarsity_JacketW51_C", "short": "PrimalItemAccessory_AynooVarsity_JacketW51_C", "group": "Varsity"}, {"name": "AYNOO Auto Deposit", "give": "Blueprint'/AynooMod/Deposit/PrimalItemStructure_AynooDeposit.PrimalItemStructure_AynooDeposit'", "item_c": "/AynooMod/Deposit/PrimalItemStructure_AynooDeposit.PrimalItemStructure_AynooDeposit_C", "short": "PrimalItemStructure_AynooDeposit_C", "struct": "/AynooMod/Deposit/PrimalStructure_AynooDeposit.PrimalStructure_AynooDeposit_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooDeposit.EngramEntry_AynooDeposit_C", "lvl": 35, "pts": 18, "group": "Auto Deposit"}, {"name": "Aynoo Drop", "give": "Blueprint'/AynooMod/Drop/PrimalItemStructure_AynooDrop.PrimalItemStructure_AynooDrop'", "item_c": "/AynooMod/Drop/PrimalItemStructure_AynooDrop.PrimalItemStructure_AynooDrop_C", "short": "PrimalItemStructure_AynooDrop_C", "struct": "/AynooMod/Drop/StorageBox_AynooDrop.StorageBox_AynooDrop_C", "group": "Loot Drops"}, {"name": "Aynoo Drop - Common", "give": "Blueprint'/AynooMod/Drop/Tiers/PrimalItemStructure_AynooDrop_Common.PrimalItemStructure_AynooDrop_Common'", "item_c": "/AynooMod/Drop/Tiers/PrimalItemStructure_AynooDrop_Common.PrimalItemStructure_AynooDrop_Common_C", "short": "PrimalItemStructure_AynooDrop_Common_C", "struct": "/AynooMod/Drop/Tiers/StorageBox_AynooDrop_Common.StorageBox_AynooDrop_Common_C", "group": "Loot Drops"}, {"name": "Aynoo Drop - Legendary", "give": "Blueprint'/AynooMod/Drop/Tiers/PrimalItemStructure_AynooDrop_Legendary.PrimalItemStructure_AynooDrop_Legendary'", "item_c": "/AynooMod/Drop/Tiers/PrimalItemStructure_AynooDrop_Legendary.PrimalItemStructure_AynooDrop_Legendary_C", "short": "PrimalItemStructure_AynooDrop_Legendary_C", "struct": "/AynooMod/Drop/Tiers/StorageBox_AynooDrop_Legendary.StorageBox_AynooDrop_Legendary_C", "group": "Loot Drops"}, {"name": "Aynoo Drop - Rare", "give": "Blueprint'/AynooMod/Drop/Tiers/PrimalItemStructure_AynooDrop_Rare.PrimalItemStructure_AynooDrop_Rare'", "item_c": "/AynooMod/Drop/Tiers/PrimalItemStructure_AynooDrop_Rare.PrimalItemStructure_AynooDrop_Rare_C", "short": "PrimalItemStructure_AynooDrop_Rare_C", "struct": "/AynooMod/Drop/Tiers/StorageBox_AynooDrop_Rare.StorageBox_AynooDrop_Rare_C", "group": "Loot Drops"}, {"name": "Aynoo Drop - Star", "give": "Blueprint'/AynooMod/Drop/Tiers/PrimalItemStructure_AynooDrop_Star.PrimalItemStructure_AynooDrop_Star'", "item_c": "/AynooMod/Drop/Tiers/PrimalItemStructure_AynooDrop_Star.PrimalItemStructure_AynooDrop_Star_C", "short": "PrimalItemStructure_AynooDrop_Star_C", "struct": "/AynooMod/Drop/Tiers/StorageBox_AynooDrop_Star.StorageBox_AynooDrop_Star_C", "group": "Loot Drops"}, {"name": "Aynoo Coin", "give": "Blueprint'/AynooMod/Items/Currency/PrimalItemConsumable_AynooCoin.PrimalItemConsumable_AynooCoin'", "item_c": "/AynooMod/Items/Currency/PrimalItemConsumable_AynooCoin.PrimalItemConsumable_AynooCoin_C", "short": "PrimalItemConsumable_AynooCoin_C", "group": "Coin"}, {"name": "Aynoo Glow Totem", "give": "Blueprint'/AynooMod/Items/Structure/PrimalItemStructure_AynooGlowTotem.PrimalItemStructure_AynooGlowTotem'", "item_c": "/AynooMod/Items/Structure/PrimalItemStructure_AynooGlowTotem.PrimalItemStructure_AynooGlowTotem_C", "short": "PrimalItemStructure_AynooGlowTotem_C", "struct": "/AynooMod/Items/Structure/PrimalStructure_AynooGlowTotem.PrimalStructure_AynooGlowTotem_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooGlowTotem.EngramEntry_AynooGlowTotem_C", "lvl": 1, "pts": 0, "group": "Totems"}, {"name": "Aynoo Totem", "give": "Blueprint'/AynooMod/Items/Structure/PrimalItemStructure_AynooTotem.PrimalItemStructure_AynooTotem'", "item_c": "/AynooMod/Items/Structure/PrimalItemStructure_AynooTotem.PrimalItemStructure_AynooTotem_C", "short": "PrimalItemStructure_AynooTotem_C", "struct": "/AynooMod/Items/Structure/PrimalStructure_AynooTotem.PrimalStructure_AynooTotem_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooTotem.EngramEntry_AynooTotem_C", "lvl": 1, "pts": 0, "group": "Totems"}, {"name": "Aynoo Totem (Huge)", "give": "Blueprint'/AynooMod/Items/Structure/PrimalItemStructure_AynooTotem_Huge.PrimalItemStructure_AynooTotem_Huge'", "item_c": "/AynooMod/Items/Structure/PrimalItemStructure_AynooTotem_Huge.PrimalItemStructure_AynooTotem_Huge_C", "short": "PrimalItemStructure_AynooTotem_Huge_C", "struct": "/AynooMod/Items/Structure/PrimalStructure_AynooTotem_Huge.PrimalStructure_AynooTotem_Huge_C", "group": "Totems"}, {"name": "Aynoo Totem (Large)", "give": "Blueprint'/AynooMod/Items/Structure/PrimalItemStructure_AynooTotem_Large.PrimalItemStructure_AynooTotem_Large'", "item_c": "/AynooMod/Items/Structure/PrimalItemStructure_AynooTotem_Large.PrimalItemStructure_AynooTotem_Large_C", "short": "PrimalItemStructure_AynooTotem_Large_C", "struct": "/AynooMod/Items/Structure/PrimalStructure_AynooTotem_Large.PrimalStructure_AynooTotem_Large_C", "group": "Totems"}, {"name": "Aynoo Totem (Medium)", "give": "Blueprint'/AynooMod/Items/Structure/PrimalItemStructure_AynooTotem_Medium.PrimalItemStructure_AynooTotem_Medium'", "item_c": "/AynooMod/Items/Structure/PrimalItemStructure_AynooTotem_Medium.PrimalItemStructure_AynooTotem_Medium_C", "short": "PrimalItemStructure_AynooTotem_Medium_C", "struct": "/AynooMod/Items/Structure/PrimalStructure_AynooTotem_Medium.PrimalStructure_AynooTotem_Medium_C", "group": "Totems"}, {"name": "AYNOO Storage", "give": "Blueprint'/AynooMod/Storage/PrimalItemStructure_AynooStorage.PrimalItemStructure_AynooStorage'", "item_c": "/AynooMod/Storage/PrimalItemStructure_AynooStorage.PrimalItemStructure_AynooStorage_C", "short": "PrimalItemStructure_AynooStorage_C", "struct": "/AynooMod/Storage/StorageBox_AynooStorage.StorageBox_AynooStorage_C", "engram": "/AynooMod/Engrams/EngramEntry_AynooStorage.EngramEntry_AynooStorage_C", "lvl": 1, "pts": 0, "group": "Storage"}], "buffs": ["/AynooMod/Buffs/PrimalBuff_AynooBlessing.PrimalBuff_AynooBlessing_C", "/AynooMod/Buffs/PrimalBuff_AynooNotify.PrimalBuff_AynooNotify_C", "/AynooMod/Buffs/PrimalBuff_AynooKeeper.PrimalBuff_AynooKeeper_C", "/AynooMod/Buffs/PrimalBuff_AynooAdmin.PrimalBuff_AynooAdmin_C"]}</script>
+<script>
+(function(){
+  var D = JSON.parse(document.getElementById('data').textContent);
+  var ORDER = ["Auto Deposit","Storage","Coin","Loot Drops","Totems","Neon","Banners","Trails","Crowns","Hats","Varsity","Streetwear"];
+  var NOTES = {
+    "Auto Deposit":"Tap E = deposit into same-tribe AYNOO / Neon Storage boxes that already hold that item. Hold E = range.",
+    "Loot Drops":"Admin-placed loot crates. No engram: code or admin panel only.",
+    "Totems":"The size versions (Medium, Large, Huge) have no engram: code only.",
+    "Varsity":"Streamer jackets (Game Series, SAS, WAEL51) have no engram: code or admin panel only.",
+    "Streetwear":"Game Over Sweatshirt is for female characters only."
+  };
+  var BUFFS = {
+    "PrimalBuff_AynooBlessing_C":"Creates the AYNOO HUD and ESC menu",
+    "PrimalBuff_AynooNotify_C":"AYNOO notifications (toast messages)",
+    "PrimalBuff_AynooKeeper_C":"Keeps cosmetics and coins after death",
+    "PrimalBuff_AynooAdmin_C":"Admin panel actions (server checks admin)"
+  };
+  var $ = function(s){return document.querySelector(s)};
+  var list = $('#list'), q = $('#q'), qty = $('#qty'), bp = $('#bp'), count = $('#count');
+  $('#nItems').textContent = D.items.length;
+  $('#nEng').textContent = D.items.filter(function(i){return i.engram}).length;
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function amount(){var n = parseInt(qty.value,10); return (isFinite(n) && n > 0) ? n : 1}
+  function give(i){return 'cheat GiveItem "' + i.give + '" ' + amount() + ' 0 ' + (bp.checked ? 1 : 0)}
+  function row(lbl, val, cls){
+    return '<div class="row ' + (cls||'') + '"><span class="lbl">' + lbl + '</span><code>' + esc(val) + '</code>' +
+           '<button class="btn' + (cls === 'give' ? ' main' : '') + '" data-copy="' + esc(val) + '">Copy</button></div>';
+  }
+  function render(){
+    var term = q.value.trim().toLowerCase();
+    var shown = D.items.filter(function(i){
+      return !term || (i.name + ' ' + i.short + ' ' + i.group + ' ' + (i.struct||'') + ' ' + (i.engram||'')).toLowerCase().indexOf(term) >= 0;
+    });
+    var html = '';
+    ORDER.forEach(function(g){
+      var its = shown.filter(function(i){return i.group === g});
+      if (!its.length) return;
+      html += '<div class="group"><h3>' + g + ' <small>' + its.length + (its.length === 1 ? ' item' : ' items') + '</small></h3>' +
+              (NOTES[g] ? '<p class="note">' + NOTES[g] + '</p>' : '') + '<div class="items">';
+      its.forEach(function(i){
+        var tags = i.engram ? '<span class="tag eng">Engram · level ' + i.lvl + ' · ' + i.pts + ' pts</span>'
+                            : '<span class="tag adm">Code / admin only</span>';
+        if (i.struct) tags += '<span class="tag plc">Placeable</span>';
+        var more = row('Item _C', i.item_c);
+        if (i.struct) more += row('Structure', i.struct);
+        if (i.engram) more += row('Engram', i.engram);
+        html += '<article class="item"><header><h4>' + esc(i.name) + '</h4>' + tags + '</header>' +
+                row('Give', give(i), 'give') + row('_C name', i.short) +
+                '<details><summary>All class paths</summary>' + more + '</details></article>';
+      });
+      html += '</div></div>';
+    });
+    list.innerHTML = html || '<p class="empty">Nothing matches "' + esc(q.value) + '". Try a shorter word.</p>';
+    count.textContent = shown.length + ' of ' + D.items.length + ' shown';
+    list._shown = shown;
+  }
+
+  var toast = $('#toast'), tt;
+  function flash(btn, msg){
+    toast.textContent = msg || 'Copied';
+    toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(function(){toast.classList.remove('show')}, 1400);
+    if (btn){ var old = btn.textContent; btn.classList.add('done'); btn.textContent = 'Copied';
+      setTimeout(function(){btn.classList.remove('done'); btn.textContent = old}, 1200); }
+  }
+  function fallback(text, btn){
+    var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly','');
+    ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    var ok = false; try { ok = document.execCommand('copy') } catch(e) {}
+    document.body.removeChild(ta);
+    flash(ok ? btn : null, ok ? 'Copied' : 'Copy blocked here: select the text and press Ctrl+C');
+  }
+  function copy(text, btn){
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){flash(btn)}, function(){fallback(text, btn)});
+    } else fallback(text, btn);
+  }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'copyAll'){
+      var lines = (list._shown || []).map(give);
+      if (lines.length) copy(lines.join('\n'), b);
+      return;
+    }
+    if (b.hasAttribute('data-copy')) return copy(b.getAttribute('data-copy'), b);
+    if (b.hasAttribute('data-copy-pre')) return copy(b.parentNode.querySelector('pre').textContent, b);
+  });
+  q.addEventListener('input', render); qty.addEventListener('input', render); bp.addEventListener('change', render);
+
+  $('#buffs').innerHTML = D.buffs.map(function(p){
+    var s = p.split('.').pop();
+    return '<tr><td><code>' + esc(s) + '</code></td><td>' + (BUFFS[s] || '') + '</td><td><code>' + esc(p) + '</code></td></tr>';
+  }).join('');
+  render();
+})();
+</script>
+</body>
+</html>
